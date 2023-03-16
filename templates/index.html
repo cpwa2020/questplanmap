@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+Index
+{% endblock %}
+{% block content %}
+    <p>Coordinates to find routes near locations</p>
+    <form action="/map" method="post">
+        <p>Latititude</p>
+        <input type="number" step="any" name="lat" id="lat" value="47.608013">
+        <p>Longitude</p>
+        <input type="number" step="any" name="lon" id="lon" value="-122.335167">
+        <br>
+        <p><input type="checkbox" name="url" id="url">Show external links</p>
+        <input type="submit" id="submit" value="Enter">
+    </form>
+    <br>
+    <p>Route number to find current trips</p>
+    <form action="/plan" method="post">
+        <p>Route ID</p>
+        <input type="text" step="any" name="id" id="id" value="40_590">
+        <br><br>
+        <input type="submit" id="submit" value="Enter">
+    </form>
+{% endblock %}

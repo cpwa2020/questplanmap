@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='custom.css')}}">
+        <title>
+        {% block title %}{% endblock %}
+        </title>
+    </head>
+    <body>
+        <h1>Quest Planner Mapper</h1>
+        {% block content %}{% endblock %}
+        <br>
+        <footer>Data from <a href="http://developer.onebusaway.org/modules/onebusaway-application-modules/current/api/where/index.html">OneBusAway</a></footer>
+    </body>
+</html>
