@@ -3,7 +3,7 @@
 Index
 {% endblock %}
 {% block content %}
-    <p>Coordinates to find routes near locations</p>
+    <h2>Coordinates to find routes near locations</h2>
     <form action="/map" method="post">
         <p>Latititude</p>
         <input type="number" step="any" name="lat" id="lat" value="47.608013">
@@ -14,7 +14,7 @@ Index
         <input type="submit" id="submit" value="Enter">
     </form>
     <br>
-    <p>Route number to find current trips</p>
+    <h2>Route number to find current trips</h2>
     <form action="/plan" method="post">
         <p>Route ID</p>
         <input type="text" step="any" name="id" id="id" value="40_590">

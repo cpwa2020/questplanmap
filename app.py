@@ -1,6 +1,6 @@
 from functions import *
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 
 app = Flask(__name__)
 
@@ -27,6 +27,10 @@ def plan():
         return render_template('plan.html',lst=lst)
     else:
         return 'Incorrect HTTP method', 400
+
+@app.route('/folmap')
+def folmap():
+    return send_file('static/mpm.html')
 
 if __name__=='__main__':
    app.run()

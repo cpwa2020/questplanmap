@@ -1,0 +1,36 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    margin: 40px;
+}
+
+h1 {
+    font-size: 40px;
+    font-style: bold;
+}
+
+h2 {
+    font-size: 20px;
+    font-style: normal;
+}
+
+footer {
+    font-size: 10px;
+    font-style: italic;
+    margin: 20px 0px;
+}
+
+input:not(#submit,#url) {
+    background-color: lightgray;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#submit {
+    font-size: 20px;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0px;
+}
