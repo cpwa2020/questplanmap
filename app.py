@@ -22,8 +22,9 @@ def map():
 @app.route('/plan', methods=['GET','POST'])
 def plan():
     if request.method == 'POST':
-        id = request.form.get('id')
-        lst = tripsroute(id)
+        iid = request.form.get('id')
+        aid = request.form.get('aid')
+        lst = tripsroute(aid,iid)
         return render_template('plan.html',lst=lst)
     else:
         return 'Incorrect HTTP method', 400
@@ -31,6 +32,15 @@ def plan():
 @app.route('/folmap')
 def folmap():
     return send_file('static/mpm.html')
+
+@app.route('/fnctns', methods=['POST'])
+def fnctns():
+    lctnh = request.form.get('lctnh')
+    lctns = request.form.get('lctns')
+    lctnw = request.form.get('lctnw')
+    lctno = request.form.get('lctno')
+    svlctn(lctnh,lctns,lctnw,lctno)
+    return 'Processed', 204
 
 if __name__=='__main__':
    app.run()

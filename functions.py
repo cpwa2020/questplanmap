@@ -2,6 +2,9 @@ import urllib.parse, urllib.request, urllib.error, json
 bsrlp = "http://api.pugetsound.onebusaway.org/api/where/"
 bsrls = ".json?key=TEST"
 import geopy, folium
+from geopy.geocoders import Nominatim
+glctr = Nominatim(user_agent="map_plan")
+mpmk = []
 
 def routesnear(lat=47.653435,lon=-122.305641,url=False,id=True,aid=True):
     try:
@@ -32,29 +35,47 @@ def routesnear(lat=47.653435,lon=-122.305641,url=False,id=True,aid=True):
     mapium(lat,lon)
     return dct
 
-def tripsroute(id,flnm='static/mpm.html',zms=10):
+def tripsroute(aid,id,flnm='static/mpm.html',zms=10):
+    fid = str(aid) + '_' + str(id)
     try:
-        with urllib.request.urlopen(bsrlp+'trips-for-route/'+str(id)+bsrls) as rspn:
+        with urllib.request.urlopen(bsrlp+'trips-for-route/'+fid+bsrls) as rspn:
             rspndc = rspn.read().decode()
         rspnld = json.loads(rspndc)
     except urllib.error.URLError as er:
         print('The api might be unavailable now; Error code: '+str(er.code))
     dlr = rspnld['data']['list']
+    if len(dlr) <= 0:
+        return {'error: no applicable data':''}
     dct = {}
     for dn in dlr:
         ll = dn['status']['position']
         dct[dn['tripId']] = ll
     plc = rspnld['data']['list'][0]['status']['position']
     flm = folium.Map(location=[plc['lat'],plc['lon']],zoom_start=zms)
+    for mk in mpmk:
+        flm.add_child(folium.Marker(location=[mk[0],mk[1]],icon=folium.Icon(color='orange',icon='home',prefix='fa')))
     for mm in dct:
-        flm.add_child(folium.Marker(location=[dct[mm]['lat'],dct[mm]['lon']]))
+        flm.add_child(folium.Marker(location=[dct[mm]['lat'],dct[mm]['lon']],icon=folium.Icon(color='green',icon='bus',prefix='fa')))
     flm.save(outfile=flnm)
     return dct
 
 def mapium(lat,lon,flnm='static/mpm.html',zms=15):
     mpm = folium.Map(location=[lat,lon],zoom_start=zms)
+    for mk in mpmk:
+        mpm.add_child(folium.Marker(location=[mk[0],mk[1]],icon=folium.Icon(color='orange',icon='home', prefix='fa')))
     mpm.add_child(folium.Marker(location=[lat,lon]))
     mpm.save(outfile=flnm)
+
+def svlctn(lctnh,lctns,lctnw,lctno=""):
+    lcl = locals()
+    ltl = []
+    for lc in lcl:
+        if lcl[lc] != '':
+            ltl.append(lcl[lc])
+    mpmk.clear()
+    for lt in ltl:
+        ltd = glctr.geocode(lt)
+        mpmk.append((ltd.latitude, ltd.longitude))
 
 # testing
 #routesnear(url=True)

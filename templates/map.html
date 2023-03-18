@@ -3,9 +3,10 @@
 Map
 {% endblock %}
 {% block content %}
+    <p>Available routes near input coordinates</p><br>
     {% for nn in lst %}
         {{nn}}
         <br>
     {% endfor %}
-    <br><iframe src="/folmap"></iframe>
+    <br><iframe src="/folmap" width="900" height="450"></iframe>
 {% endblock %}

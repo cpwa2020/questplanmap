@@ -3,9 +3,10 @@
 Map
 {% endblock %}
 {% block content %}
+    <p>Current trips for the input route, subject to change</p><br>
     {% for nn, vlu in lst.items() %}
         {{nn}} : {{vlu['lat'], vlu['lon']}}
         <br>
     {% endfor %}
-    <br><iframe src="/folmap"></iframe>
+    <br><iframe src="/folmap" width="900" height="450"></iframe>
 {% endblock %}
