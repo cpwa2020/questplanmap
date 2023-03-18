@@ -21,7 +21,7 @@ footer {
     margin: 20px 0px;
 }
 
-input:not(#submit,#url), button {
+input:not(#submit,#url), button, select {
     background-color: lightgray;
     border-width: 1px;
     border-radius: 5px;
@@ -46,4 +46,8 @@ input:not(#submit,#url), button {
     position: relative;
     width: 50%;
     float: left;
+}
+
+#url {
+    accent-color: lightgray;
 }

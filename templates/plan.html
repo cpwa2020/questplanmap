@@ -3,7 +3,8 @@
 Map
 {% endblock %}
 {% block content %}
-    <p>Current trips for the input route, subject to change</p><br>
+    <p>Current trips for the input route, subject to change</p>
+    <p>(Click on a marker to view coordinates and estimated location)</p><br>
     {% for nn, vlu in lst.items() %}
         {{nn}} : {{vlu['lat'], vlu['lon']}}
         <br>

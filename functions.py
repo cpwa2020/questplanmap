@@ -53,17 +53,25 @@ def tripsroute(aid,id,flnm='static/mpm.html',zms=10):
     plc = rspnld['data']['list'][0]['status']['position']
     flm = folium.Map(location=[plc['lat'],plc['lon']],zoom_start=zms)
     for mk in mpmk:
-        flm.add_child(folium.Marker(location=[mk[0],mk[1]],icon=folium.Icon(color='orange',icon='home',prefix='fa')))
+        rvrk = str(glctr.reverse((mk[0],mk[1])))
+        mkltln = rvrk+': ('+str(mk[0])+', '+str(mk[1])+')'
+        flm.add_child(folium.Marker(location=[mk[0],mk[1]],popup=mkltln,icon=folium.Icon(color='orange',icon='home',prefix='fa')))
     for mm in dct:
-        flm.add_child(folium.Marker(location=[dct[mm]['lat'],dct[mm]['lon']],icon=folium.Icon(color='green',icon='bus',prefix='fa')))
+        rvrm = str(glctr.reverse((dct[mm]['lat'],dct[mm]['lon'])))
+        mmltln = rvrm+': ('+str(dct[mm]['lat'])+', '+str(dct[mm]['lon'])+')'
+        flm.add_child(folium.Marker(location=[dct[mm]['lat'],dct[mm]['lon']],popup=mmltln,icon=folium.Icon(color='green',icon='bus',prefix='fa')))
     flm.save(outfile=flnm)
     return dct
 
 def mapium(lat,lon,flnm='static/mpm.html',zms=15):
+    rvr = str(glctr.reverse((lat,lon)))
+    ltln = rvr+': ('+str(lat)+', '+str(lon)+')'
     mpm = folium.Map(location=[lat,lon],zoom_start=zms)
     for mk in mpmk:
-        mpm.add_child(folium.Marker(location=[mk[0],mk[1]],icon=folium.Icon(color='orange',icon='home', prefix='fa')))
-    mpm.add_child(folium.Marker(location=[lat,lon]))
+        rvrk = str(glctr.reverse((mk[0],mk[1])))
+        mkltln = rvrk+': ('+str(mk[0])+', '+str(mk[1])+')'
+        mpm.add_child(folium.Marker(location=[mk[0],mk[1]],popup=mkltln,icon=folium.Icon(color='orange',icon='home', prefix='fa')))
+    mpm.add_child(folium.Marker(location=[lat,lon],popup=ltln))
     mpm.save(outfile=flnm)
 
 def svlctn(lctnh,lctns,lctnw,lctno=""):
